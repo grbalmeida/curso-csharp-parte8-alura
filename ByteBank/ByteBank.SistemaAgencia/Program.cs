@@ -11,9 +11,34 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            TestaWhere();
+            TestaIEnumerable();
 
             Console.ReadLine();
+        }
+
+        static void TestaIEnumerable()
+        {
+            var contas = new List<ContaCorrente>
+            {
+                new ContaCorrente(341, 1),
+                new ContaCorrente(342, 999),
+                null,
+                new ContaCorrente(340, 4),
+                new ContaCorrente(340, 456),
+                new ContaCorrente(340, 10),
+                null,
+                null,
+                new ContaCorrente(290, 123)
+            };
+
+            var contasNaoNulas = contas
+                .Where(conta => conta != null)
+                .OrderBy(conta => conta.Numero);
+
+            foreach (var conta in contasNaoNulas)
+            {
+                Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
+            }
         }
 
         static void TestaWhere()
