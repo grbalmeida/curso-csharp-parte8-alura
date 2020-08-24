@@ -1,4 +1,5 @@
 ﻿using ByteBank.Modelos;
+using ByteBank.SistemaAgencia.Extensoes;
 using System;
 using System.Collections.Generic;
 
