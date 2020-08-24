@@ -3,6 +3,7 @@ using ByteBank.SistemaAgencia.Comparadores;
 using ByteBank.SistemaAgencia.Extensoes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ByteBank.SistemaAgencia
 {
@@ -10,9 +11,41 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            TestaInterfaceIComparer();
+            TestaOrderBy();
 
             Console.ReadLine();
+        }
+
+        static void TestaOrderBy()
+        {
+            var contas = new List<ContaCorrente>
+            {
+                new ContaCorrente(341, 1),
+                new ContaCorrente(342, 999),
+                new ContaCorrente(340, 4),
+                new ContaCorrente(340, 456),
+                new ContaCorrente(340, 10),
+                new ContaCorrente(290, 123)
+            };
+
+            IOrderedEnumerable<ContaCorrente> contasOrdenadasPeloNumero =
+                contas.OrderBy(conta => conta.Numero);
+
+            foreach (var conta in contasOrdenadasPeloNumero)
+            {
+                Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
+            }
+
+            Console.WriteLine("-------------------------------");
+
+            IOrderedEnumerable<ContaCorrente> contasOrdenadasPelaAgencia =
+                contas.OrderBy(conta => conta.Agencia);
+
+
+            foreach (var conta in contasOrdenadasPelaAgencia)
+            {
+                Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
+            }
         }
 
         static void TestaInterfaceIComparer()
