@@ -11,9 +11,44 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            TestaOrderBy();
+            TestaExpressoesLambda();
 
             Console.ReadLine();
+        }
+
+        static void TestaExpressoesLambda()
+        {
+            var contas = new List<ContaCorrente>
+            {
+                new ContaCorrente(341, 1),
+                new ContaCorrente(342, 999),
+                null,
+                new ContaCorrente(340, 4),
+                new ContaCorrente(340, 456),
+                new ContaCorrente(340, 10),
+                null,
+                null,
+                new ContaCorrente(290, 123)
+            };
+
+            IOrderedEnumerable<ContaCorrente> contasOrdenadas =
+                contas.OrderBy(conta =>
+                {
+                    if (conta == null)
+                    {
+                        return int.MinValue;
+                    }
+
+                    return conta.Numero;
+                });
+
+            foreach (var conta in contasOrdenadas)
+            {
+                if (conta != null)
+                {
+                    Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
+                }
+            }
         }
 
         static void TestaOrderBy()
