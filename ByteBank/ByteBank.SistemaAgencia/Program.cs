@@ -9,6 +9,26 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
+            TestaVar();
+
+            Console.ReadLine();
+        }
+
+        static void TestaVar()
+        {
+            var resultado = SomarVarios(1, 5, 9);
+
+            Console.WriteLine(resultado);
+
+            var conta = new ContaCorrente(344, 56456456);
+
+            conta.Depositar(3443);
+
+            Console.WriteLine(conta);
+        }
+
+        static void TestaMetodoExtensaoGenerico()
+        {
             List<int> idades = new List<int>();
 
             idades.Add(1);
@@ -25,8 +45,6 @@ namespace ByteBank.SistemaAgencia
             {
                 Console.WriteLine(idades[i]);
             }
-
-            Console.ReadLine();
         }
 
         static void TestaListaDeObject()
