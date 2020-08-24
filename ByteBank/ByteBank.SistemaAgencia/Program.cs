@@ -1,4 +1,5 @@
 ﻿using ByteBank.Modelos;
+using ByteBank.SistemaAgencia.Comparadores;
 using ByteBank.SistemaAgencia.Extensoes;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,33 @@ namespace ByteBank.SistemaAgencia
     class Program
     {
         static void Main(string[] args)
+        {
+            TestaInterfaceIComparer();
+
+            Console.ReadLine();
+        }
+
+        static void TestaInterfaceIComparer()
+        {
+            var contas = new List<ContaCorrente>
+            {
+                new ContaCorrente(341, 57480),
+                new ContaCorrente(342, 45678),
+                new ContaCorrente(340, 1),
+                new ContaCorrente(340, 99999),
+                new ContaCorrente(340, 48950),
+                new ContaCorrente(290, 18950)
+            };
+
+            contas.Sort(new ComparadorContaCorrentePorAgencia());
+
+            foreach (var conta in contas)
+            {
+                Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
+            }
+        }
+
+        static void TestaInterfaceIComparable()
         {
             var contas = new List<ContaCorrente>
             {
@@ -25,8 +53,6 @@ namespace ByteBank.SistemaAgencia
             {
                 Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
             }
-
-            Console.ReadLine();
         }
 
         static void TestaOrdenacaoListaStrings()
